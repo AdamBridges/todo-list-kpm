@@ -1,9 +1,12 @@
+import App from './pages/_app';
+import {HomePageView} from './pages/home_page_view';
 
-export default function Home() {
+export default function page() {
     return (
-    <div>
-        <h1>KPM To Do List</h1>
-        <p>Time to start building!</p>
-    </div>
-);
+        <App
+            pageProps={undefined}
+            Component={HomePageView}
+            router={{} as any}
+        />
+    );
 }
