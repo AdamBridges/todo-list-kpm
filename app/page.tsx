@@ -1,5 +1,5 @@
 import App from './pages/_app';
-import {HomePageView} from './pages/home_page_view';
+import {HomePageView} from './pages/home/home_page_view';
 
 export default function page() {
     return (

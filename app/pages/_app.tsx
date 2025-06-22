@@ -1,7 +1,6 @@
 import '@mantine/core/styles.css';
-import cx from 'clsx';
 import type { AppProps } from 'next/app';
-import { AppShell, Container, createTheme, MantineProvider } from '@mantine/core';
+import { createTheme, MantineProvider } from '@mantine/core';
 
 const theme = createTheme({
   autoContrast: true,
