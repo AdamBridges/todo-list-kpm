@@ -37,12 +37,6 @@ npm install @mantine/core @mantine/hooks
 npm install --save-dev postcss postcss-preset-mantine postcss-simple-vars
 ```
 
-[Jest](https://jestjs.io/docs/tutorial-react) (Testing packages) MAY NOT NEED THIS:
-
-```bash 
-npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer @babel/core @babel/preset-typescript @jest/globals
-```
-
 [Jest](https://nextjs.org/docs/app/guides/testing/jest) (Testing packages)
 ```bash 
 npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest
