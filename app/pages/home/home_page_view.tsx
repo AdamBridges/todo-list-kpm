@@ -29,10 +29,9 @@ export function HomePageView() {
     // Local stroage initialization: 
     useEffect(() => {
       const storedState = localStorage.getItem(TaskStateKeys.taskState);
-      let parsedState: State = { totalTasks: 0, isAddingTask: false, tasks: [] };
       if (typeof window !== 'undefined' && storedState) {
         try {
-          parsedState = JSON.parse(storedState);
+          let parsedState: State = JSON.parse(storedState);
           console.debug("Restored state from localStorage:", parsedState);
           dispatcher({ type: TaskStateTypes.initializeState, value: parsedState });
         } catch (error) {
