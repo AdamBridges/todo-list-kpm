@@ -50,7 +50,7 @@ export function stateReducer(state: State, action: TaskListAction): State {
       state = { ...state, isAddingTask: action.value };
       break;
     case TaskStateTypes.addTask:
-      state = { ...state, tasks: action.value, totalTasks: state.totalTasks + 1 };
+      state = { ...state, tasks: action.value, totalTasks: state.totalTasks + 1, isAddingTask: false };
       break;
     case TaskStateTypes.deleteTask:
       const updatedTasks: TaskProperties[] = state.tasks.filter(

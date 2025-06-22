@@ -187,8 +187,9 @@ export function createTask(taskValue?: string) {
         done: false
       };
       dispatcher({ type: TaskStateTypes.addTask, value: [...state.tasks, taskProp] });
+} else {
+      return cancelTask();
     }
-    return cancelTask();
   }
 
   function cancelTask() {
