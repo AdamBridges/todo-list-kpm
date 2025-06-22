@@ -16,16 +16,18 @@ export enum TaskStateTypes {
     deleteAllTasks = "deleteAllTasks",
     setTotalTasks = "setTotalTasks",
     setIsAddingNewTask = "setIsAddingNewTask",
+    initializeState = "initializeState",
     addTask = "addTask",
     editTask = "editTask",
     deleteTask = "deleteTask",
     updateTaskStatus = "updateTaskStatus",
 }
 
-enum TaskStateKeys {
+export enum TaskStateKeys {
     totalTasks = "totalTasks",
     isAddingTask = "isAddingTask",
-    tasks = "tasks"
+    tasks = "tasks",
+    taskState = "taskState"
 }
 
 export type TaskListAction =
@@ -36,6 +38,7 @@ export type TaskListAction =
   | { type: TaskStateTypes.deleteTask; value: State[TaskStateKeys.tasks] }
   | { type: TaskStateTypes.editTask; value: State[TaskStateKeys.tasks] }
   | { type: TaskStateTypes.updateTaskStatus; value: State[TaskStateKeys.tasks] }
+  | { type: TaskStateTypes.initializeState; value: State }
 
 export const initialState: State = { totalTasks: 0, isAddingTask: false, tasks: [] };
 
@@ -72,10 +75,15 @@ export function stateReducer(state: State, action: TaskListAction): State {
       );
       state = { ...state, tasks: updatedTaskStatus };
       break;
+    case TaskStateTypes.initializeState:
+      state = action.value ;
+      break;
     default:
       throw new Error("Unknown action");
   }
 
+  localStorage.setItem(TaskStateKeys.taskState, JSON.stringify(state));
   console.debug("Current state:", state);
+
   return state;
 }

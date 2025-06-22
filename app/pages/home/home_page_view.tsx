@@ -1,8 +1,8 @@
 'use client'
 
 import { Button, Container, Group, MantineTheme, TextInput, Title, useMantineTheme } from '@mantine/core';
-import {ActionDispatch, useReducer, useState} from 'react';
-import { TaskStateTypes, stateReducer, State, TaskListAction, initialState, TaskProperties } from './home_page_viewModel';
+import {ActionDispatch, useEffect, useReducer, useState} from 'react';
+import { TaskStateTypes, stateReducer, State, TaskListAction, initialState, TaskProperties, TaskStateKeys } from './home_page_viewModel';
 
 export let state: State = initialState;
 let dispatcher: ActionDispatch<[action: TaskListAction]>;
@@ -20,11 +20,26 @@ let theme: MantineTheme;
  */
 export function HomePageView() {
     console.log("HomePageView component rendered");
- 
-    const [stateValue, dispatch] = useReducer(stateReducer, initialState);
+
+    const [stateValue, dispatch] = useReducer(stateReducer, state);
     state = stateValue;
     dispatcher = dispatch;
     theme = useMantineTheme();
+    
+    // Local stroage initialization: 
+    useEffect(() => {
+      const storedState = localStorage.getItem(TaskStateKeys.taskState);
+      let parsedState: State = { totalTasks: 0, isAddingTask: false, tasks: [] };
+      if (typeof window !== 'undefined' && storedState) {
+        try {
+          parsedState = JSON.parse(storedState);
+          console.debug("Restored state from localStorage:", parsedState);
+          dispatcher({ type: TaskStateTypes.initializeState, value: parsedState });
+        } catch (error) {
+          console.error("Error parsing stored state:", error);
+        }
+      }
+    }, []);
 
     const addNewTask = () => dispatch({ type: TaskStateTypes.setIsAddingNewTask, value: true });
 
@@ -187,7 +202,7 @@ export function createTask(taskValue?: string) {
         done: false
       };
       dispatcher({ type: TaskStateTypes.addTask, value: [...state.tasks, taskProp] });
-} else {
+    } else {
       return cancelTask();
     }
   }
