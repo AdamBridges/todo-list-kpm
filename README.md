@@ -7,12 +7,24 @@ A simple To Do List program developed by Adam Bridges. Users can create, edit, a
 1. Download and install [Node.js](https://nodejs.org/en/).
 1. Download or clone this repo.
 2. Open your Command Line Interface (CLI) and navigate to where you downloaded/cloned the project files (`cd <insert your path to the project folder here>`). 
-3. Run the following commands in the CLI from the project's directory (`~\todo-list-kpm`) to install the necessary packages to compile the To Do List:
+3. Run the following command in the CLI from the project's directory (`~\todo-list-kpm`) to install the necessary packages to compile the To Do List:
 
 [Next.js](https://nextjs.org/docs/app/getting-started/installation) (React Framework)
 ```bash 
 npm i next@latest react@latest react-dom@latest
 ```
+
+4. Once packages are installed, run the development server:
+
+```bash
+npm run dev
+```
+
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to use the To Do List.
+
+## Troubleshooting:
+
+Should any issues occur with compiling the program, ensure that the following packages are installed:
 
 [TypeScript](https://react.dev/learn/typescript)
 ```bash 
@@ -35,11 +47,3 @@ npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react rea
 ```bash 
 npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node @types/jest
 ```
-
-4. Once packages are installed, run the development server:
-
-```bash
-npm run dev
-```
-
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to use the To Do List.
