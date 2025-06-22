@@ -22,6 +22,14 @@ npm run dev
 
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to use the To Do List.
 
+### Testing:
+
+To test that adding, editing, and deleting a task functions and are rendered as intended, run the following:
+
+```bash
+npm run test
+```
+
 ## Troubleshooting:
 
 Should any issues occur with compiling the program, ensure that the following packages are installed:
