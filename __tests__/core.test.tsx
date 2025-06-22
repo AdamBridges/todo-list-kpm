@@ -4,7 +4,7 @@ import Page from '../app/page'
 import { createTask, editTask, state } from '@/app/pages/home/home_page_view'
 import { act } from 'react'
 
-test('create, edit, and delete a single task', () => {
+test('create, edit, delete, and mark a single task as done', () => {
   act(() => {
     render(<Page />)
   });
@@ -41,6 +41,8 @@ test('create, edit, and delete a single task', () => {
 
   // Check if the input is populated with the task name: 
   expect(editedTaskData!.name).toBe(taskName);
+  taskItem = screen.getByDisplayValue(taskName);
+  expect(taskItem).toBeInTheDocument();
 
   // Simulate changing the task name: 
   taskName = 'Updated Task Name';
@@ -50,6 +52,15 @@ test('create, edit, and delete a single task', () => {
   editedTaskData = taskData();
   expect(editedTaskData!.isEditing).toBe(false);
   expect(editedTaskData!.name).toBe(taskName);
+
+  // Mark the task as done:
+  const doneCheckbox = screen.getByRole('button', { name: /Done/i });
+  expect(editedTaskData!.done).toBe(false);
+  act(() => {
+    doneCheckbox.click();
+  });
+  editedTaskData = taskData();
+  expect(editedTaskData!.done).toBe(true);
 
   // Simulate deleting the task
   taskItem = screen.getByText(taskName);
