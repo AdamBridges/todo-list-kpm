@@ -4,7 +4,7 @@ import { Button, Container, Group, MantineTheme, TextInput, Title, useMantineThe
 import {ActionDispatch, useReducer, useState} from 'react';
 import { TaskStateTypes, stateReducer, State, TaskListAction, initialState, TaskProperties } from './home_page_viewModel';
 
-let state: State = initialState;
+export let state: State = initialState;
 let dispatcher: ActionDispatch<[action: TaskListAction]>;
 let theme: MantineTheme;
 
@@ -130,44 +130,8 @@ function TaskTile(task: TaskProperties) {
 /** Component for creating and editing tasks. */ 
 function TaskForm({task}: {task?: TaskProperties}) {
   const [taskValue, setTaskValue] = useState<string>(task?.name ?? '');
-  const cancelTask = () => dispatcher({ 
-    type: TaskStateTypes.setIsAddingNewTask, 
-    value: false
-  });
-  const createTask = () => {
-    const tValue = taskValue?.trim();
-    const isNotEmpty: boolean = tValue != undefined && tValue?.length > 0;
-
-    if (isNotEmpty) {
-      const taskProp: TaskProperties = {
-        id: new Date().getTime().toString(),
-        name: taskValue!,
-        isEditing: false,
-        done: false
-      };
-      dispatcher({ type: TaskStateTypes.addTask, value: [...state.tasks, taskProp] });
-    }
-    return cancelTask();
-  };
-  const editTask = () => {
-    const tValue = taskValue?.trim();
-    const isNotEmpty: boolean = tValue != undefined && tValue?.length > 0;
-
-    if (isNotEmpty) {
-      const taskProp: TaskProperties = {
-        id: task!.id,
-        name: taskValue!,
-        isEditing: task!.isEditing,
-        done: task!.done
-      };
-      dispatcher({ type: TaskStateTypes.editTask, value: [taskProp] });
-    }
-    return cancelTask();
-  };
-  const cancelTaskEdit = () => dispatcher({ 
-    type: TaskStateTypes.editTask, 
-    value: [task!]
-  });
+  
+  
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const currentValue: string = event.currentTarget.value;
@@ -191,18 +155,68 @@ function TaskForm({task}: {task?: TaskProperties}) {
         onChange={handleChange} 
         label={task ? "Edit Task" : "New Task"} 
         labelProps={{ style: { paddingBottom:'16px' } }}
-        placeholder={"Task name example: Meet Adam Bridges"}/>
+        placeholder={"Enter task name: Meet Adam Bridges"}/>
         
         <Group justify="right" mt="xl">
           <Button 
-            onClick={task ? cancelTaskEdit : cancelTask}
+            onClick={() => task ? cancelTaskEdit(task) : cancelTask()}
             variant="outline" 
             color="grey" 
           >
             Cancel
           </Button>
-          <Button onClick={task ? editTask : createTask}>{task ? 'Update' : 'Create'}</Button>
+          <Button onClick={() => task 
+            ? editTask(task, taskValue) 
+            : createTask(taskValue)}>
+              {task ? 'Update' : 'Create'}
+            </Button>
       </Group>
     </Container>
   );
 }
+
+export function createTask(taskValue?: string) {
+    const tValue = taskValue?.trim();
+    const isNotEmpty: boolean = tValue != undefined && tValue?.length > 0;
+
+    if (isNotEmpty) {
+      const taskProp: TaskProperties = {
+        id: new Date().getTime().toString(),
+        name: taskValue!,
+        isEditing: false,
+        done: false
+      };
+      dispatcher({ type: TaskStateTypes.addTask, value: [...state.tasks, taskProp] });
+    }
+    return cancelTask();
+  }
+
+  function cancelTask() {
+    return dispatcher({ 
+    type: TaskStateTypes.setIsAddingNewTask, 
+    value: false
+  });
+  }
+
+export function editTask(task: TaskProperties, taskValue?: string) {
+    const tValue = taskValue?.trim();
+    const isNotEmpty: boolean = tValue != undefined && tValue?.length > 0;
+
+    if (isNotEmpty) {
+      const taskProp: TaskProperties = {
+        id: task!.id,
+        name: taskValue!,
+        isEditing: task!.isEditing,
+        done: task!.done
+      };
+      dispatcher({ type: TaskStateTypes.editTask, value: [taskProp] });
+    }
+    return cancelTask();
+  }
+
+  function cancelTaskEdit(task: TaskProperties) {
+    return dispatcher({ 
+    type: TaskStateTypes.editTask, 
+    value: [task!]
+  });
+  }

@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <style
+    data-mantine-styles="true"
+  >
+    :root{--mantine-h1-font-size: 2rem;--mantine-h2-font-size: 1.5rem;}
+  </style>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m_7485cace mantine-Container-root"
+    data-size="md"
+    style="--container-size: var(--container-size-md); padding: 2rem;"
+  >
+    <h1
+      class="m_8a5d1357 mantine-Title-root"
+      data-order="1"
+      style="--title-fw: var(--mantine-h1-font-weight); --title-lh: var(--mantine-h1-line-height); --title-fz: var(--mantine-h1-font-size);"
+    >
+      KPM To Do List
+    </h1>
+    <p>
+      Time to start getting those tasks written down!
+    </p>
+    <br />
+    <div>
+      <h2
+        class="m_8a5d1357 mantine-Title-root"
+        data-order="2"
+        style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); padding-bottom: calc(0.9375rem * var(--mantine-scale));"
+      >
+        Tasks to do: 
+      </h2>
+      <p>
+        No tasks available.
+      </p>
+    </div>
+    <br />
+    <p>
+      Total tasks to do: 
+      0
+    </p>
+    <br />
+    <div
+      class="m_4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: right; --group-wrap: wrap;"
+    >
+      <button
+        class="mantine-focus-auto mantine-active m_77c9d27d mantine-Button-root m_87cf2631 mantine-UnstyledButton-root"
+        justify="center"
+        style="--button-justify: center; --button-color: var(--mantine-color-white); margin: calc(0.5rem * var(--mantine-scale));"
+        type="button"
+      >
+        <span
+          class="m_80f1301b mantine-Button-inner"
+        >
+          <span
+            class="m_811560b9 mantine-Button-label"
+          >
+            New Task
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

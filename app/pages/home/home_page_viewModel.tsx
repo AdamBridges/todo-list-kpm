@@ -1,4 +1,3 @@
-import {ActionDispatch} from 'react';
 
 export type TaskProperties = {
   id: string, 
@@ -17,8 +16,6 @@ export enum TaskStateTypes {
     deleteAllTasks = "deleteAllTasks",
     setTotalTasks = "setTotalTasks",
     setIsAddingNewTask = "setIsAddingNewTask",
-    setTasks = "setTasks",
-    // setTask = "setTask",
     addTask = "addTask",
     editTask = "editTask",
     deleteTask = "deleteTask",
@@ -82,31 +79,3 @@ export function stateReducer(state: State, action: TaskListAction): State {
   console.debug("Current state:", state);
   return state;
 }
-
-// Might try to implement this if I have time: 
-export class HomePageViewModel {
-    constructor() {
-        initialState.tasks = this.getTasks();
-        console.debug("HomePageViewModel initialized");
-    }
-    state = initialState;    
-
-    addNewTask({ state, dispatch }: {
-  state: State, dispatch: ActionDispatch<[action: TaskListAction]> 
-}) {
-        console.log("Adding new task | state:", this.state);
-        this.state.totalTasks += 1;
-        this.state.isAddingTask = true;
-        
-    };
-    editTask() {}; 
-    removeTaskFromList() {};
-    updateTaskStatus() {};
-    deleteAllTasks() {};
-        
-    getTasks() {
-        const tasks: Array<TaskProperties> = [];
-            return tasks;
-        }
-}
-
